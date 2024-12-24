@@ -1,7 +1,7 @@
 <template>
-	<X3Button />
+	<X3UIPreview />
 </template>
 
 <script setup lang="ts">
-import X3Button from '@/components/X3UI/X3Button.vue';
+import X3UIPreview from '@/components/X3UIPreview.vue';
 </script>
