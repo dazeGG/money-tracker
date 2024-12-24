@@ -14,9 +14,9 @@ const slots = defineSlots();
 
 const props = withDefaults(
 	defineProps<{
-      type?: 'default' | 'primary' | 'info' | 'success' | 'warning' | 'error',
-      size?: 'small' | 'medium' | 'large'
-    }>(),
+    type?: 'default' | 'primary' | 'info' | 'success' | 'warning' | 'error',
+    size?: 'small' | 'medium' | 'large'
+  }>(),
 	{
 		type: 'default',
 		size: 'medium',

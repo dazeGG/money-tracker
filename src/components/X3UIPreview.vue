@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { startCase } from 'lodash';
 
-import X3Button from '@/core/X3UI/X3Button.vue';
+import X3Button from '@/X3UI/X3Button.vue';
 
 const ButtonTypes = ['default', 'primary', 'info', 'success', 'warning', 'error'] as const;
 const ButtonSizes = ['small', 'medium', 'large'] as const;
