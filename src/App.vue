@@ -1,5 +1,5 @@
 <template>
-  <X3Button></X3Button>
+	<X3Button />
 </template>
 
 <script setup lang="ts">
