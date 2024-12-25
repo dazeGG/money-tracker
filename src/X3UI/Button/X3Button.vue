@@ -10,14 +10,16 @@
 </template>
 
 <script setup lang="ts">
+import type { Type, Size } from '@/X3UI/types';
+
 const slots = defineSlots();
 
 const props = withDefaults(
 	defineProps<{
     /** Button type */
-    type?: 'default' | 'primary' | 'info' | 'success' | 'warning' | 'error',
+    type?: Type
     /** Button size */
-    size?: 'small' | 'medium' | 'large'
+    size?: Size
   }>(),
 	{
 		type: 'default',
@@ -30,30 +32,32 @@ const props = withDefaults(
 .x3-button {
   display: flex;
   align-items: center;
-  border-radius: 0.6rem;
 
   /* SIZING */
   &--small {
+    padding-inline: 0.5rem;
     height: var(--height-small);
-    padding-inline: 0.6rem;
-    font-size: 1.2rem;
+    font-size: var(--font-small);
+    border-radius: var(--border-radius-small);
   }
 
   &--medium {
+    padding-inline: 0.75rem;
     height: var(--height-medium);
-    padding-inline: 1rem;
-    font-size: 1.6rem;
+    font-size: var(--font-medium);
+    border-radius: var(--border-radius-medium);
   }
 
   &--large {
+    padding-inline: 1rem;
     height: var(--height-large);
-    padding-inline: 1.4rem;
-    font-size: 2rem;
+    font-size: var(--font-large);
+    border-radius: var(--border-radius-large);
   }
 
   /* THEMING */
   &--default {
-    background-color: #353535;
+    background-color: var(--color-secondary-background);
   }
 
   &--primary {
