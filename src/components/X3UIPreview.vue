@@ -71,7 +71,7 @@
 						<span class="h4">Statuses</span>
 					</template>
 					<template #default>
-						<div class="flex gap-2">
+						<div class="flex gap-2 flex-wrap">
 							<X3Input
 								v-for="(inputStatus, index) in InputStatuses"
 								:key="index"
@@ -81,7 +81,7 @@
 						</div>
 					</template>
 				</X3Card>
-				<X3Card>
+				<X3Card class="col-span-2">
 					<template #header>
 						<span class="h4">Sized</span>
 					</template>
