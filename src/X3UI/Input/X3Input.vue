@@ -27,6 +27,7 @@ const props = withDefaults(
 
 <style scoped lang="scss">
 @use "@/assets/style/variables" as variables;
+@use "@/assets/style/mixins" as mixins;
 
 .x3-input {
   background-color: variables.$color-secondary-background;
@@ -57,6 +58,10 @@ const props = withDefaults(
 
   &::placeholder {
     color: variables.$color-placeholder;
+  }
+
+  @include mixins.hover {
+    border-color: variables.$color-primary;
   }
 
   &:focus {
