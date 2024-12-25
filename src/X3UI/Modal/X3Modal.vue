@@ -77,36 +77,43 @@ const submit = () => emit('submit');
 @use "@/assets/style/mixins" as mixins;
 
 .x3-modal {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	margin-inline: auto;
+
 	&--small {
-		--max-width: 30rem;
+		max-width: 30rem;
 	}
 
 	&--medium {
-		--max-width: 45rem;
+		max-width: 45rem;
 	}
 
 	&--large {
-		--max-width: 60rem;
+		max-width: 60rem;
 	}
 
 	&__overflow {
 		position: fixed;
 		top: 0;
+		right: 0;
+		bottom: 0;
 		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: 999;
+		z-index: -1;
 		background-color: rgba(0, 0, 0, 0.5);
+
+		/* EXPERIMENTAL */
+		backdrop-filter: blur(4px);
 	}
 
 	&__content {
 		width: 100%;
-		max-width: var(--max-width);
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		z-index: 1000;
+		max-width: var(--x3-max-width);
 	}
 
 	&__close {

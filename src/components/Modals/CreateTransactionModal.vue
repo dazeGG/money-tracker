@@ -1,7 +1,7 @@
 <template>
 	<X3Modal
 		v-model:show="show"
-		title="Add a transaction"
+		title="Add transaction"
 		submit-button-text="Add"
 		@cancel="cancel"
 		@submit="addTransaction"
