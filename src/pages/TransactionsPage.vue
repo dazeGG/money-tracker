@@ -1,11 +1,13 @@
 <template>
-	<div class="flex justify-between">
+	<div class="flex justify-between items-center">
 		<CreateTransactionModal v-model:show="show.addTransaction" />
 		<h1 class="h1">Transactions</h1>
 		<X3Button @click="openModal('addTransaction')">Add transaction</X3Button>
 	</div>
-	<div>
-		<X3Table :columns="columns" :data="transactionsStore.transactions" />
+	<div class="mt-2">
+		<X3Card>
+			<X3Table :columns="columns" :data="transactionsStore.transactions" />
+		</X3Card>
 	</div>
 </template>
 
@@ -14,6 +16,7 @@ import { useTransactionsStore } from '@/store';
 import { useModals } from '@/composables';
 
 import X3Button from '@/X3UI/Button/X3Button.vue';
+import X3Card from '@/X3UI/Card/X3Card.vue';
 import X3Table from '@/X3UI/Table/X3Table.vue';
 import CreateTransactionModal from '@/components/Modals/CreateTransactionModal.vue';
 
