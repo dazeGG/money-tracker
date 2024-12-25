@@ -15,7 +15,7 @@ import type { ITransaction } from '@/types/modules/transactions.ts';
 
 const transactionsStore = useTransactionsStore();
 
-const columns: IColumn[] = [
+const columns: IColumn<ITransaction>[] = [
 	{
 		key: 'id',
 		title: 'ID',

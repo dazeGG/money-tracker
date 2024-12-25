@@ -11,7 +11,7 @@
 						>
 							<RenderFunction v-if="typeof column.title === 'function'" :renderer="column.title()" />
 							<span v-else>{{ column.title }}</span>
-							<Icon :icon="getSortIcon(column)" />
+							<Icon v-if="column.sortable && column.key && sortIcon[column.key]" :icon="sortIcon[column.key]" />
 						</div>
 					</div>
 				</th>
@@ -20,7 +20,8 @@
 		<tbody class="x3-table__body">
 			<tr v-for="(item, index) in preparedData" :key="item.id ?? index" class="x3-table__tr">
 				<td v-for="(column, index) in columns" :key="index" class="x3-table__td">
-					<RenderFunction v-if="column.render" :renderer="column.render(item)" />
+					<RenderFunction v-if="column.render && typeof column.render === 'function'" :renderer="column.render(item)" />
+					<span v-else-if="column.render">{{ column.render }}</span>
 					<span v-else-if="column.key">{{ item[column.key] }}</span>
 				</td>
 			</tr>
@@ -35,10 +36,12 @@ import { RenderFunction } from '@/utils';
 
 import type { IColumn, Sort } from '@/X3UI/types';
 
+type IData = Record<string, any>
+
 const props = withDefaults(
 	defineProps<{
 		columns: IColumn[]
-		data: Record<string, any>[]
+		data: IData[]
 		multisort?: boolean
 		sort?: Record<string, Sort>
 	}>(),
@@ -48,24 +51,42 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-	(e: 'update:sort', newSort: Record<string, Sort>)
+	(e: 'update:sort', newSort: Record<string, Sort>): void
 }>();
 
-const preparedData = computed<Record<string, any>>(() => {
-	const sortingColumn: IColumn | undefined = props.columns.find(
+type SortingColumn = Omit<IColumn, 'sortable' | 'key'> & {
+	sortable: true
+	key: string
+}
+
+const defaultAscSorter = (a: IData, b: IData, sortingColumn: SortingColumn) => {
+	if (a[sortingColumn.key] > b[sortingColumn.key]) {
+		return 1;
+	} else if (a[sortingColumn.key] < b[sortingColumn.key]) {
+		return -1;
+	} else {
+		return 0;
+	}
+};
+
+const ascSorter = (a: IData, b: IData, sortingColumn: SortingColumn) => {
+	if (sortingColumn.ascSorter) {
+		return sortingColumn.ascSorter(a, b);
+	} else {
+		return defaultAscSorter(a, b, sortingColumn);
+	}
+};
+
+const preparedData = computed<IData[]>(() => {
+	const sortingColumn: SortingColumn | undefined = props.columns.find(
 		(column: IColumn) => column.sortable && column.key && !!sortValue.value[column.key],
-	);
+	) as SortingColumn | undefined;
 
 	return sortingColumn
-		? props.data.toSorted((a, b) => {
-			if (a[sortingColumn.key] > b[sortingColumn.key]) {
-				return sortValue.value[sortingColumn.key] === 'asc' ? 1 : -1;
-			} else if (a[sortingColumn.key] < b[sortingColumn.key]) {
-				return sortValue.value[sortingColumn.key] === 'asc' ? -1 : 1;
-			} else {
-				return 0;
-			}
-		})
+		? props.data.toSorted((a: IData, b: IData) =>
+			sortValue.value[sortingColumn.key] === 'asc'
+				? ascSorter(a, b, sortingColumn)
+				: (ascSorter(a, b, sortingColumn) * -1))
 		: props.data;
 });
 
@@ -96,18 +117,27 @@ const changeSort = (column: IColumn) => {
 	}
 };
 
-const getSortIcon = (column: IColumn): string => {
-	if (column.sortable && column.key) {
-		switch (sortValue.value[column.key]) {
-		case null:
-			return 'mi:sort';
-		case 'asc':
-			return 'mi:arrow-up';
-		case 'desc':
-			return 'mi:arrow-down';
+const sortIcon = computed<Record<string, string>>(() => {
+	const sortIconsMap: Record<string, string> = {};
+
+	for (const column of props.columns) {
+		if (column.sortable && column.key) {
+			switch (sortValue.value[column.key]) {
+			case null:
+				sortIconsMap[column.key] = 'mi:sort';
+				break;
+			case 'asc':
+				sortIconsMap[column.key] = 'mi:arrow-up';
+				break;
+			case 'desc':
+				sortIconsMap[column.key] = 'mi:arrow-down';
+				break;
+			}
 		}
 	}
-};
+
+	return sortIconsMap;
+});
 
 const initSort = () => {
 	props.columns.forEach((column: IColumn) => {

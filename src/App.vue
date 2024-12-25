@@ -11,10 +11,10 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 
-import { onBeforeMount } from 'vue';
+// import { onBeforeMount } from 'vue';
 import { useRouter } from 'vue-router';
-import { kebabCase } from 'lodash';
-import cssVariables from '@/assets/style/_variables.module.scss';
+// import { kebabCase } from 'lodash';
+// import cssVariables from '@/assets/style/_variables.module.scss';
 
 import X3Button from '@/X3UI/Button/X3Button.vue';
 
@@ -28,13 +28,13 @@ const goto = (page: 'transactions' | 'X3UI preview') => {
 	}
 };
 
-const setGlobalVars = () => {
-	const html = document.children[0] as HTMLElement;
-	const { style: htmlStyle } = html;
-	for (const key in cssVariables) {
-		htmlStyle.setProperty(`--${ kebabCase(key) }`, cssVariables[key]);
-	}
-};
-
-onBeforeMount(setGlobalVars);
+// const setGlobalVars = () => {
+// 	const html = document.children[0] as HTMLElement;
+// 	const { style: htmlStyle } = html;
+// 	for (const key in cssVariables) {
+// 		htmlStyle.setProperty(`--${ kebabCase(key) }`, cssVariables[key]);
+// 	}
+// };
+//
+// onBeforeMount(setGlobalVars);
 </script>
