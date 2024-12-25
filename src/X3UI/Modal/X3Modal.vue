@@ -48,7 +48,7 @@ const close = () => {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/style/mixins' as mixin;
+@use "@/assets/style/mixins" as mixin;
 
 .x3-modal {
   &--small {

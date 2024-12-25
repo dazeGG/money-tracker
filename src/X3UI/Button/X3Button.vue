@@ -29,9 +29,17 @@ const props = withDefaults(
 </script>
 
 <style scoped lang="scss">
+@use "sass:color" as color;
+
+@use "@/assets/style/variables" as variables;
+@use "@/assets/style/mixins" as mixin;
+
+$hover-white-mixin-part: 75%;
+
 .x3-button {
   display: flex;
   align-items: center;
+  transition: background-color 0.2s ease-in-out;
 
   /* SIZING */
   &--small {
@@ -57,27 +65,51 @@ const props = withDefaults(
 
   /* THEMING */
   &--default {
-    background-color: var(--color-secondary-background);
+    background-color: variables.$color-secondary-background;
+
+    @include mixin.hover {
+      background-color: color.mix(variables.$color-secondary-background, white, 90%);
+    }
   }
 
   &--primary {
-    background-color: var(--color-primary);
+    background-color: variables.$color-primary;
+
+    @include mixin.hover {
+      background-color: color.mix(variables.$color-primary, white, $hover-white-mixin-part);
+    }
   }
 
   &--info {
-    background-color: var(--color-info);
+    background-color: variables.$color-info;
+
+    @include mixin.hover {
+      background-color: color.mix(variables.$color-info, white, $hover-white-mixin-part);
+    }
   }
 
   &--success {
-    background-color: var(--color-success);
+    background-color: variables.$color-success;
+
+    @include mixin.hover {
+      background-color: color.mix(variables.$color-success, white, $hover-white-mixin-part);
+    }
   }
 
   &--warning {
-    background-color: var(--color-warning);
+    background-color: variables.$color-warning;
+
+    @include mixin.hover {
+      background-color: color.mix(variables.$color-warning, white, $hover-white-mixin-part);
+    }
   }
 
   &--error {
-    background-color: var(--color-error);
+    background-color: variables.$color-error;
+
+    @include mixin.hover {
+      background-color: color.mix(variables.$color-error, white, $hover-white-mixin-part);
+    }
   }
 }
 </style>

@@ -26,10 +26,12 @@ const props = withDefaults(
 </script>
 
 <style scoped lang="scss">
+@use "@/assets/style/variables" as variables;
+
 .x3-input {
-  background-color: var(--color-secondary-background);
+  background-color: variables.$color-secondary-background;
   border-radius: 0.5rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid variables.$color-border;
   transition: border-color 0.2s ease-in-out;
 
   &--small {
@@ -54,19 +56,19 @@ const props = withDefaults(
   }
 
   &::placeholder {
-    color: var(--color-placeholder);
+    color: variables.$color-placeholder;
   }
 
   &:focus {
-    border-color: var(--color-primary);
+    border-color: variables.$color-primary;
   }
 
   &--warning {
-    border-color: var(--color-warning) !important;
+    border-color: variables.$color-warning !important;
   }
 
   &--error {
-    border-color: var(--color-error) !important;
+    border-color: variables.$color-error !important;
   }
 }
 </style>

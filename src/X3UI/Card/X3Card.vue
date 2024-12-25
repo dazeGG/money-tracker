@@ -37,10 +37,12 @@ const props = withDefaults(
 </script>
 
 <style scoped lang="scss">
+@use "@/assets/style/variables" as variables;
+
 .x3-card {
   width: 100%;
-  background-color: var(--color-body-background);
-  border: 1px solid var(--color-border);
+  background-color: variables.$color-body-background;
+  border: 1px solid variables.$color-border;
   border-radius: var(--border-radius-medium);
 
   &--small {
