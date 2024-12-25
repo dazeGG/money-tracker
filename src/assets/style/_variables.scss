@@ -1,0 +1,29 @@
+:root {
+  /* HEIGHTS */
+  --height-small: 1.5rem;
+  --height-medium: 2rem;
+  --height-large: 2.5rem;
+
+  /* FONT SIZES */
+  --font-small: 0.75rem;
+  --font-medium: 1rem;
+  --font-large: 1.25rem;
+
+  /* BORDER RADIUS */
+  --border-radius-small: 0.25rem;
+  --border-radius-medium: 0.375rem;
+  --border-radius-large: 0.5rem;
+}
+
+$color-primary: #6267FF;
+$color-info: #008FFB;
+$color-success: #00E19B;
+$color-warning: #FFB600;
+$color-error: #FF0156;
+
+$color-text: #FAFAFA;
+$color-background: #121212;
+$color-secondary-background: #303030;
+$color-body-background: #1A1A1A;
+$color-placeholder: rgba(255, 255, 255, 0.5);
+$color-border: #454545;

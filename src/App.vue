@@ -1,32 +1,40 @@
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+	<header class="my-4 flex gap-2">
+		<X3Button @click="goto('transactions')">Transactions page</X3Button>
+		<X3Button @click="goto('X3UI preview')">X3UI preview page</X3Button>
+	</header>
+	<main>
+		<RouterView />
+	</main>
 </template>
 
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue';
+import { RouterView } from 'vue-router';
+
+import { onBeforeMount } from 'vue';
+import { useRouter } from 'vue-router';
+import { kebabCase } from 'lodash';
+import cssVariables from '@/assets/style/_variables.module.scss';
+
+import X3Button from '@/X3UI/Button/X3Button.vue';
+
+const router = useRouter();
+
+const goto = (page: 'transactions' | 'X3UI preview') => {
+	if (page === 'transactions') {
+		router.push('/transactions');
+	} else if (page === 'X3UI preview') {
+		router.push('/x3ui-preview');
+	}
+};
+
+const setGlobalVars = () => {
+	const html = document.children[0] as HTMLElement;
+	const { style: htmlStyle } = html;
+	for (const key in cssVariables) {
+		htmlStyle.setProperty(`--${ kebabCase(key) }`, cssVariables[key]);
+	}
+};
+
+onBeforeMount(setGlobalVars);
 </script>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>

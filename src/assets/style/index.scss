@@ -1,0 +1,9 @@
+@use "fonts";
+@use "typography";
+@use "variables";
+@use "reset";
+@use "style";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
