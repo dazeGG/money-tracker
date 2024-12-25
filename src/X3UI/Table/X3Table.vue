@@ -10,7 +10,8 @@
 		<tbody class="x3-table__body">
 			<tr v-for="(item, index) in props.data" :key="item.id ?? index" class="x3-table__tr">
 				<td v-for="(column, index) in columns" :key="index" class="x3-table__td">
-					{{ column.key ? item[column.key] : column.render(item) }}
+					<span v-if="column.key">{{ item[column.key] }}</span>
+					<RenderFunction v-else :renderer="column.render(item)" />
 				</td>
 			</tr>
 		</tbody>
@@ -18,6 +19,8 @@
 </template>
 
 <script setup lang="ts">
+import { RenderFunction } from '@/utils';
+
 const props = defineProps<{
 	columns: Record<string, any>
 	data: Record<string, any>[]

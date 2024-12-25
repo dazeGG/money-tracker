@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import { h } from 'vue';
 import { useTransactionsStore } from '@/store';
 import { useModals } from '@/composables';
 
@@ -28,7 +29,7 @@ const { showModal: show, openModal } = useModals('addTransaction');
 const columns = [
 	{
 		title: 'Date',
-		render: (row: ITransaction) => row.created.format('DD.MM.YYYY HH:mm'),
+		render: (transaction: ITransaction) => transaction.created.format('DD.MM.YYYY HH:mm'),
 	},
 	{
 		key: 'title',
