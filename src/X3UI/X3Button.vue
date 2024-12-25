@@ -14,7 +14,9 @@ const slots = defineSlots();
 
 const props = withDefaults(
 	defineProps<{
+    /** Button type */
     type?: 'default' | 'primary' | 'info' | 'success' | 'warning' | 'error',
+    /** Button size */
     size?: 'small' | 'medium' | 'large'
   }>(),
 	{
