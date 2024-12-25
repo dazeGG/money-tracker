@@ -19,7 +19,7 @@
 						<slot name="footer"></slot>
 						<div v-if="!slots.footer">
 							<div class="flex gap-2 justify-end">
-								<X3Button @click="cancel">{{ cancelButtonText ?? 'Cancel' }}</X3Button>
+								<X3Button secondary @click="cancel">{{ cancelButtonText ?? 'Cancel' }}</X3Button>
 								<X3Button :type="props.submitButtonType" @click="submit">{{ submitButtonText ?? 'Submit' }}</X3Button>
 							</div>
 						</div>
