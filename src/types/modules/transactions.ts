@@ -7,6 +7,12 @@ interface ITransaction {
 	sum: number
 }
 
+interface ICreateEditTransaction {
+	title: string
+	sum: string
+}
+
 export type {
 	ITransaction,
+	ICreateEditTransaction,
 };

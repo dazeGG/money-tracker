@@ -2,7 +2,7 @@ import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import dayjs from 'dayjs';
 
-import type { ITransaction } from '@/types/modules/transactions.ts';
+import type { ITransaction, ICreateEditTransaction } from '@/types/modules/transactions.ts';
 
 export const useTransactionsStore = defineStore('transactions', () => {
 	const transactions = ref<ITransaction[]>([]);
@@ -15,27 +15,31 @@ export const useTransactionsStore = defineStore('transactions', () => {
 	};
 
 	const saveTransactions = (): void => {
-		localStorage.setItem('transactions', JSON.stringify(transactions));
+		localStorage.setItem('transactions', JSON.stringify(transactions.value));
 	};
 
-	const addTransaction = (transactionData: Omit<ITransaction, 'id' | 'created'>): void => {
+	const addTransaction = (transactionData: ICreateEditTransaction): void => {
 		transactions.value.push({
 			id: transactions.value[transactions.value.length - 1].id + 1,
 			created: dayjs(),
-			...transactionData,
+			title: transactionData.title,
+			sum: parseInt(transactionData.sum),
 		});
+		saveTransactions();
 	};
 
-	const updateTransaction = (transactionId: number, newTransactionData: Omit<ITransaction, 'id' | 'created'>): void => {
+	const updateTransaction = (transactionId: number, newTransactionData: ICreateEditTransaction): void => {
 		for (let i: number = 0; i < transactions.value.length; i++) {
 			if (transactions.value[i].id === transactionId) {
 				transactions.value[i] = {
 					...transactions.value[i],
-					...newTransactionData,
+					title: newTransactionData.title,
+					sum: parseInt(newTransactionData.sum),
 				};
 				break;
 			}
 		}
+		saveTransactions();
 	};
 
 	const deleteTransaction = (transactionId: number): void => {
@@ -45,6 +49,7 @@ export const useTransactionsStore = defineStore('transactions', () => {
 				break;
 			}
 		}
+		saveTransactions();
 	};
 
 	return {
