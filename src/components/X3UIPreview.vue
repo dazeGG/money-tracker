@@ -14,9 +14,9 @@
 			</div>
 			<span class="h1">Modal</span>
 			<div class="flex gap-2">
-				<X3Button @click="showModals.small = true">Show small modal</X3Button>
-				<X3Button @click="showModals.medium = true">Show medium modal</X3Button>
-				<X3Button @click="showModals.large = true">Show large modal</X3Button>
+				<X3Button @click="showModals.small = true">Show <b>small</b> modal</X3Button>
+				<X3Button @click="showModals.medium = true">Show <b>medium</b> modal</X3Button>
+				<X3Button @click="showModals.large = true">Show <b>large</b> modal</X3Button>
 			</div>
 			<X3Modal v-for="(size, index) in sizes" :key="index" v-model:show="showModals[size]" :size="size" title="Modal" />
 			<span class="h1">Button</span>
@@ -27,7 +27,7 @@
 					</template>
 					<template #default>
 						<div class="flex gap-2 flex-wrap">
-							<X3Button v-for="(buttonType, index) in ButtonTypes" :key="index" :type="buttonType">Button</X3Button>
+							<X3Button v-for="(buttonType, index) in ButtonTypes" :key="index" :type="buttonType">{{ buttonType }}</X3Button>
 						</div>
 					</template>
 				</X3Card>
@@ -38,7 +38,7 @@
 					<template #default>
 						<div class="flex gap-2 flex-wrap">
 							<X3Button v-for="(buttonType, index) in ButtonTypes" :key="index" :type="buttonType" secondary>
-								Button
+								{{ buttonType }}
 							</X3Button>
 						</div>
 					</template>
