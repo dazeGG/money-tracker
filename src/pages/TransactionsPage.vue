@@ -5,48 +5,16 @@
 		<X3Button @click="openModal('addTransaction')">Add transaction</X3Button>
 	</div>
 	<div class="mt-2">
-		<X3Card>
-			<X3Table :columns="columns" :data="transactionsStore.transactions" />
-		</X3Card>
+		<TransactionsTable />
 	</div>
 </template>
 
 <script setup lang="ts">
-import { useTransactionsStore } from '@/store';
 import { useModals } from '@/composables';
 
 import X3Button from '@/X3UI/Button/X3Button.vue';
-import X3Card from '@/X3UI/Card/X3Card.vue';
-import X3Table from '@/X3UI/Table/X3Table.vue';
 import CreateTransactionModal from '@/components/Modals/CreateTransactionModal.vue';
+import TransactionsTable from '@/components/Tables/TransactionsTable.vue';
 
-import type { ITransaction } from '@/types/modules/transactions.ts';
-
-const transactionsStore = useTransactionsStore();
 const { showModal: show, openModal } = useModals('addTransaction');
-
-const columns = [
-	{
-		key: 'id',
-		title: 'ID',
-	},
-	{
-		title: 'Date',
-		render: (transaction: ITransaction) => transaction.created.format('DD.MM.YYYY HH:mm'),
-	},
-	{
-		key: 'title',
-		title: 'Title',
-	},
-	{
-		key: 'sum',
-		title: 'Sum',
-	},
-];
-
-const created = () => {
-	transactionsStore.loadTransactions();
-};
-
-created();
 </script>
