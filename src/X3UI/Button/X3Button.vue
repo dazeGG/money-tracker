@@ -45,8 +45,8 @@ const props = withDefaults(
 @use "@/assets/style/mixins" as mixins;
 
 $hover-white-mixin-part: 75%;
-$secondary-alpha: 0.85;
-$secondary-alpha-hover: 0.75;
+$secondary-alpha: -85%;
+$secondary-alpha-hover: -75%;
 
 @mixin button-type-colors ($color) {
   &.x3-button--basic {
@@ -59,10 +59,10 @@ $secondary-alpha-hover: 0.75;
 
   &.x3-button--secondary {
     color: $color;
-    background-color: transparentize($color, $secondary-alpha);
+    background-color: color.scale($color, $alpha: $secondary-alpha);
 
     @include mixins.hover {
-      background-color: transparentize($color, $secondary-alpha-hover);
+      background-color: color.scale($color, $alpha: $secondary-alpha-hover);
     }
   }
 }

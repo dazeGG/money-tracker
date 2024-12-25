@@ -1,19 +1,32 @@
 <template>
-	<X3Button @click="() => show = true">Add new transaction</X3Button>
-	<CreateTransactionModal v-model:show="show" />
-	<X3UIPreview />
+	<header class="my-4 flex gap-2">
+		<X3Button @click="goto('home')">Home page</X3Button>
+		<X3Button @click="goto('X3UI preview')">X3UI preview page</X3Button>
+	</header>
+	<main>
+		<RouterView />
+	</main>
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue';
+import { RouterView } from 'vue-router';
+
+import { onBeforeMount } from 'vue';
+import { useRouter } from 'vue-router';
 import { kebabCase } from 'lodash';
 import cssVariables from '@/assets/style/_variables.module.scss';
 
 import X3Button from '@/X3UI/Button/X3Button.vue';
-import X3UIPreview from '@/components/X3UIPreview.vue';
-import CreateTransactionModal from '@/components/Modals/CreateTransactionModal.vue';
 
-const show = ref<boolean>(false);
+const router = useRouter();
+
+const goto = (page: 'home' | 'X3UI preview') => {
+	if (page === 'home') {
+		router.push('/');
+	} else if (page === 'X3UI preview') {
+		router.push('/x3ui-preview');
+	}
+};
 
 const setGlobalVars = () => {
 	const html = document.children[0] as HTMLElement;
