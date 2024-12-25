@@ -7,7 +7,7 @@ interface Props {
 const RenderFunction: FunctionalComponent<Props> = (props: Props) => props.renderer;
 RenderFunction.props = {
 	renderer: {
-		type: Object,
+		type: [Object, String, Number],
 		required: true,
 	},
 };
