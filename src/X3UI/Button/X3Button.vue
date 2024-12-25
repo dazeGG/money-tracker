@@ -32,7 +32,7 @@ const props = withDefaults(
 @use "sass:color" as color;
 
 @use "@/assets/style/variables" as variables;
-@use "@/assets/style/mixins" as mixin;
+@use "@/assets/style/mixins" as mixins;
 
 $hover-white-mixin-part: 75%;
 
@@ -67,7 +67,7 @@ $hover-white-mixin-part: 75%;
   &--default {
     background-color: variables.$color-secondary-background;
 
-    @include mixin.hover {
+    @include mixins.hover {
       background-color: color.mix(variables.$color-secondary-background, white, 90%);
     }
   }
@@ -75,7 +75,7 @@ $hover-white-mixin-part: 75%;
   &--primary {
     background-color: variables.$color-primary;
 
-    @include mixin.hover {
+    @include mixins.hover {
       background-color: color.mix(variables.$color-primary, white, $hover-white-mixin-part);
     }
   }
@@ -83,7 +83,7 @@ $hover-white-mixin-part: 75%;
   &--info {
     background-color: variables.$color-info;
 
-    @include mixin.hover {
+    @include mixins.hover {
       background-color: color.mix(variables.$color-info, white, $hover-white-mixin-part);
     }
   }
@@ -91,7 +91,7 @@ $hover-white-mixin-part: 75%;
   &--success {
     background-color: variables.$color-success;
 
-    @include mixin.hover {
+    @include mixins.hover {
       background-color: color.mix(variables.$color-success, white, $hover-white-mixin-part);
     }
   }
@@ -99,7 +99,7 @@ $hover-white-mixin-part: 75%;
   &--warning {
     background-color: variables.$color-warning;
 
-    @include mixin.hover {
+    @include mixins.hover {
       background-color: color.mix(variables.$color-warning, white, $hover-white-mixin-part);
     }
   }
@@ -107,7 +107,7 @@ $hover-white-mixin-part: 75%;
   &--error {
     background-color: variables.$color-error;
 
-    @include mixin.hover {
+    @include mixins.hover {
       background-color: color.mix(variables.$color-error, white, $hover-white-mixin-part);
     }
   }
