@@ -1,7 +1,16 @@
 :root {
+  /* COLORS */
   --color-primary: #6267ff;
   --color-info: #008FFB;
   --color-success: #00E19B;
   --color-warning: #FFB600;
   --color-error: #FF0156;
+
+  --color-placeholder: rgba(255, 255, 255, 0.33);
+  --color-border: #454545;
+
+  /* HEIGHTS */
+  --height-small: 2.4rem;
+  --height-medium: 3rem;
+  --height-large: 3.6rem;
 }

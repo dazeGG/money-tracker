@@ -1,5 +1,5 @@
 <template>
-	<button class="x3-button" :class="[props.type, props.size]">
+	<button class="x3-button" :class="[`x3-button--${props.type}`, `x3-button--${props.size}`]">
 		<span v-if="slots.icon" class="x3-button__icon">
 			<slot name="icon"></slot>
 		</span>
@@ -33,46 +33,46 @@ const props = withDefaults(
   border-radius: 0.6rem;
 
   /* SIZING */
-  &.small {
-    height: 2.4rem;
+  &--small {
+    height: var(--height-small);
     padding-inline: 0.6rem;
     font-size: 1.2rem;
   }
 
-  &.medium {
-    height: 3rem;
+  &--medium {
+    height: var(--height-medium);
     padding-inline: 1rem;
     font-size: 1.6rem;
   }
 
-  &.large {
-    height: 3.6rem;
+  &--large {
+    height: var(--height-large);
     padding-inline: 1.4rem;
     font-size: 2rem;
   }
 
   /* THEMING */
-  &.default {
+  &--default {
     background-color: #353535;
   }
 
-  &.primary {
+  &--primary {
     background-color: var(--color-primary);
   }
 
-  &.info {
+  &--info {
     background-color: var(--color-info);
   }
 
-  &.success {
+  &--success {
     background-color: var(--color-success);
   }
 
-  &.warning {
+  &--warning {
     background-color: var(--color-warning);
   }
 
-  &.error {
+  &--error {
     background-color: var(--color-error);
   }
 }

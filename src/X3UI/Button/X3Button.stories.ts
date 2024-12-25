@@ -1,4 +1,4 @@
-import X3Button from '@/X3UI/X3Button.vue';
+import X3Button from '@/X3UI/Button/X3Button.vue';
 
 import type { Meta, StoryObj } from '@storybook/vue3';
 
