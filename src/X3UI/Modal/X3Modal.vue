@@ -43,13 +43,13 @@ const show = defineModel<boolean>('show', { default: false });
 
 const props = withDefaults(
 	defineProps<{
-    title?: string
-    size?: Size
+		title?: string
+		size?: Size
 		showFooter?: boolean
 		cancelButtonText?: string
 		submitButtonText?: string
 		submitButtonType?: Type
-  }>(),
+	}>(),
 	{
 		size: 'medium',
 		showFooter: true,
@@ -58,8 +58,8 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (e: 'open'): void
-  (e: 'close'): void
+	(e: 'open'): void
+	(e: 'close'): void
 	(e: 'cancel'): void
 	(e: 'submit'): void
 }>();
@@ -77,44 +77,44 @@ const submit = () => emit('submit');
 @use "@/assets/style/mixins" as mixins;
 
 .x3-modal {
-  &--small {
-    --max-width: 30rem;
-  }
+	&--small {
+		--max-width: 30rem;
+	}
 
-  &--medium {
-    --max-width: 45rem;
-  }
+	&--medium {
+		--max-width: 45rem;
+	}
 
-  &--large {
-    --max-width: 60rem;
-  }
+	&--large {
+		--max-width: 60rem;
+	}
 
-  &__overflow {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+	&__overflow {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 999;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
 
-  &__content {
-    width: 100%;
-    max-width: var(--max-width);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-  }
+	&__content {
+		width: 100%;
+		max-width: var(--max-width);
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1000;
+	}
 
-  &__close {
-    transition: rotate 0.2s ease-in-out;
+	&__close {
+		transition: rotate 0.2s ease-in-out;
 
-    @include mixins.hover {
-      rotate: 90deg;
-    }
-  }
+		@include mixins.hover {
+			rotate: 90deg;
+		}
+	}
 }
 </style>

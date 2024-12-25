@@ -28,8 +28,8 @@ const slots = defineSlots();
 
 const props = withDefaults(
 	defineProps<{
-    size?: Size
-  }>(),
+		size?: Size
+	}>(),
 	{
 		size: 'medium',
 	},
@@ -40,35 +40,35 @@ const props = withDefaults(
 @use "@/assets/style/variables" as variables;
 
 .x3-card {
-  width: 100%;
-  background-color: variables.$color-body-background;
-  border: 1px solid variables.$color-border;
-  border-radius: var(--border-radius-medium);
+	width: 100%;
+	background-color: variables.$color-body-background;
+	border: 1px solid variables.$color-border;
+	border-radius: var(--border-radius-medium);
 
-  &--small {
-    --x3-padding: 0.75rem;
-  }
+	&--small {
+		--x3-padding: 0.75rem;
+	}
 
-  &--medium {
-    --x3-padding: 1rem;
-  }
+	&--medium {
+		--x3-padding: 1rem;
+	}
 
-  &--large {
-    --x3-padding: 1.25rem;
-  }
+	&--large {
+		--x3-padding: 1.25rem;
+	}
 
-  &__header {
-    padding: var(--x3-padding);
-    display: flex;
-    justify-content: space-between;
-  }
+	&__header {
+		padding: var(--x3-padding);
+		display: flex;
+		justify-content: space-between;
+	}
 
-  &__content {
-    padding: var(--x3-padding);
-  }
+	&__content {
+		padding: var(--x3-padding);
+	}
 
-  &__footer {
-    padding: var(--x3-padding);
-  }
+	&__footer {
+		padding: var(--x3-padding);
+	}
 }
 </style>

@@ -22,7 +22,7 @@ import CreateTransactionForm from '@/components/Forms/CreateTransactionForm.vue'
 const transactionsStore = useTransactionsStore();
 
 const show = defineModel<boolean>('show', { default: false });
-const model = ref<{title: string; sum: string}>({ title: '', sum: '' });
+const model = ref<{ title: string; sum: string }>({ title: '', sum: '' });
 
 const resetModel = () => {
 	model.value.title = '';

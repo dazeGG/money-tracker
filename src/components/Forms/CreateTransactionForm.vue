@@ -10,5 +10,5 @@
 <script setup lang="ts">
 import X3Input from '@/X3UI/Input/X3Input.vue';
 
-const model = defineModel<{title: string; sum: string}>('model', { required: true });
+const model = defineModel<{ title: string; sum: string }>('model', { required: true });
 </script>
