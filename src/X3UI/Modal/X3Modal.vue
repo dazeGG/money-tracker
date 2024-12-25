@@ -15,8 +15,14 @@
 					<template v-if="slots.default" #default>
 						<slot></slot>
 					</template>
-					<template v-if="slots.footer" #footer>
+					<template v-if="props.showFooter" #footer>
 						<slot name="footer"></slot>
+						<div v-if="!slots.footer">
+							<div class="flex gap-2 justify-end">
+								<X3Button @click="cancel">{{ cancelButtonText ?? 'Cancel' }}</X3Button>
+								<X3Button :type="props.submitButtonType" @click="submit">{{ submitButtonText ?? 'Submit' }}</X3Button>
+							</div>
+						</div>
 					</template>
 				</X3Card>
 			</div>
@@ -27,8 +33,9 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
 import X3Card from '@/X3UI/Card/X3Card.vue';
+import X3Button from '@/X3UI/Button/X3Button.vue';
 
-import type { Size } from '@/X3UI/types';
+import type { Type, Size } from '@/X3UI/types';
 
 const slots = defineSlots();
 
@@ -36,67 +43,78 @@ const show = defineModel<boolean>('show', { default: false });
 
 const props = withDefaults(
 	defineProps<{
-    title?: string
-    size?: Size
-  }>(),
+		title?: string
+		size?: Size
+		showFooter?: boolean
+		cancelButtonText?: string
+		submitButtonText?: string
+		submitButtonType?: Type
+	}>(),
 	{
 		size: 'medium',
+		showFooter: true,
+		submitButtonType: 'primary',
 	},
 );
 
 const emit = defineEmits<{
-  (e: 'open'): void;
-  (e: 'close'): void;
+	(e: 'open'): void
+	(e: 'close'): void
+	(e: 'cancel'): void
+	(e: 'submit'): void
 }>();
 
 const close = () => {
 	show.value = false;
 	emit('close');
 };
+
+const cancel = () => emit('cancel');
+const submit = () => emit('submit');
 </script>
 
 <style scoped lang="scss">
 @use "@/assets/style/mixins" as mixins;
 
 .x3-modal {
-  &--small {
-    --max-width: 30rem;
-  }
+	&--small {
+		--max-width: 30rem;
+	}
 
-  &--medium {
-    --max-width: 45rem;
-  }
+	&--medium {
+		--max-width: 45rem;
+	}
 
-  &--large {
-    --max-width: 60rem;
-  }
+	&--large {
+		--max-width: 60rem;
+	}
 
-  &__overflow {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+	&__overflow {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 999;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
 
-  &__content {
-    width: 100%;
-    max-width: var(--max-width);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-  }
+	&__content {
+		width: 100%;
+		max-width: var(--max-width);
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1000;
+	}
 
-  &__close {
-    transition: rotate 0.2s ease-in-out;
+	&__close {
+		transition: rotate 0.2s ease-in-out;
 
-    @include mixins.hover {
-      rotate: 90deg;
-    }
-  }
+		@include mixins.hover {
+			rotate: 90deg;
+		}
+	}
 }
 </style>

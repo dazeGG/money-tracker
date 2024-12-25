@@ -1,6 +1,6 @@
 <template>
 	<header class="my-4 flex gap-2">
-		<X3Button @click="goto('home')">Home page</X3Button>
+		<X3Button @click="goto('transactions')">Transactions page</X3Button>
 		<X3Button @click="goto('X3UI preview')">X3UI preview page</X3Button>
 	</header>
 	<main>
@@ -20,9 +20,9 @@ import X3Button from '@/X3UI/Button/X3Button.vue';
 
 const router = useRouter();
 
-const goto = (page: 'home' | 'X3UI preview') => {
-	if (page === 'home') {
-		router.push('/');
+const goto = (page: 'transactions' | 'X3UI preview') => {
+	if (page === 'transactions') {
+		router.push('/transactions');
 	} else if (page === 'X3UI preview') {
 		router.push('/x3ui-preview');
 	}
