@@ -1,0 +1,16 @@
+@use "variables" as variables;
+
+:export {
+  colorPrimary: variables.$color-primary;
+  colorInfo: variables.$color-info;
+  colorSuccess: variables.$color-success;
+  colorWarning: variables.$color-warning;
+  colorError: variables.$color-error;
+
+  colorText: variables.$color-text;
+  colorBackground: variables.$color-background;
+  colorSecondaryBackground: variables.$color-secondary-background;
+  colorBodyBackground: variables.$color-body-background;
+  colorPlaceholder: variables.$color-placeholder;
+  colorBorder: variables.$color-border;
+}

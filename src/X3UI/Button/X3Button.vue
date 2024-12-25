@@ -1,5 +1,12 @@
 <template>
-	<button class="x3-button" :class="[`x3-button--${props.type}`, `x3-button--${props.size}`]">
+	<button
+		class="x3-button"
+		:class="[
+			`x3-button--${props.type}`,
+			`x3-button--${props.size}`,
+			props.secondary ? 'x3-button--secondary' : 'x3-button--basic'
+		]"
+	>
 		<span v-if="slots.icon" class="x3-button__icon">
 			<slot name="icon"></slot>
 		</span>
@@ -20,18 +27,50 @@ const props = withDefaults(
     type?: Type
     /** Button size */
     size?: Size
+    /** Button secondary */
+    secondary?: boolean
   }>(),
 	{
 		type: 'default',
 		size: 'medium',
+		secondary: false,
 	},
 );
 </script>
 
 <style scoped lang="scss">
+@use "sass:color" as color;
+
+@use "@/assets/style/variables" as variables;
+@use "@/assets/style/mixins" as mixins;
+
+$hover-white-mixin-part: 75%;
+$secondary-alpha: 0.85;
+$secondary-alpha-hover: 0.75;
+
+@mixin button-type-colors ($color) {
+  &.x3-button--basic {
+    background-color: $color;
+
+    @include mixins.hover {
+      background-color: color.mix($color, white, $hover-white-mixin-part);
+    }
+  }
+
+  &.x3-button--secondary {
+    color: $color;
+    background-color: transparentize($color, $secondary-alpha);
+
+    @include mixins.hover {
+      background-color: transparentize($color, $secondary-alpha-hover);
+    }
+  }
+}
+
 .x3-button {
   display: flex;
   align-items: center;
+  transition: background-color 0.2s ease-in-out;
 
   /* SIZING */
   &--small {
@@ -57,27 +96,46 @@ const props = withDefaults(
 
   /* THEMING */
   &--default {
-    background-color: var(--color-secondary-background);
+    &.x3-button--basic {
+      outline: 0.0625rem solid variables.$color-border;
+      transition-property: outline-color, color;
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in-out;
+
+      @include mixins.hover {
+        outline-color: variables.$color-primary;
+        color: variables.$color-primary;
+      }
+    }
+
+    &.x3-button--secondary {
+      outline: none;
+      background-color: variables.$color-secondary-background;
+
+      @include mixins.hover {
+        background-color: color.mix(variables.$color-secondary-background, white, 90%);
+      }
+    }
   }
 
   &--primary {
-    background-color: var(--color-primary);
+    @include button-type-colors(variables.$color-primary);
   }
 
   &--info {
-    background-color: var(--color-info);
+    @include button-type-colors(variables.$color-info);
   }
 
   &--success {
-    background-color: var(--color-success);
+    @include button-type-colors(variables.$color-success);
   }
 
   &--warning {
-    background-color: var(--color-warning);
+    @include button-type-colors(variables.$color-warning);
   }
 
   &--error {
-    background-color: var(--color-error);
+    @include button-type-colors(variables.$color-error);
   }
 }
 </style>

@@ -48,7 +48,7 @@ const close = () => {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/style/mixins' as mixin;
+@use "@/assets/style/mixins" as mixins;
 
 .x3-modal {
   &--small {
@@ -86,7 +86,7 @@ const close = () => {
   &__close {
     transition: rotate 0.2s ease-in-out;
 
-    @include mixin.hover {
+    @include mixins.hover {
       rotate: 90deg;
     }
   }
