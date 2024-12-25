@@ -12,6 +12,9 @@
 							<Icon icon="ic:round-close" width="1.25rem" />
 						</button>
 					</template>
+					<template #default>
+						<slot></slot>
+					</template>
 				</X3Card>
 			</div>
 		</div>
