@@ -12,8 +12,11 @@
 							<Icon icon="ic:round-close" width="1.25rem" />
 						</button>
 					</template>
-					<template #default>
+					<template v-if="slots.default" #default>
 						<slot></slot>
+					</template>
+					<template v-if="slots.footer" #footer>
+						<slot name="footer"></slot>
 					</template>
 				</X3Card>
 			</div>
@@ -26,6 +29,8 @@ import { Icon } from '@iconify/vue';
 import X3Card from '@/X3UI/Card/X3Card.vue';
 
 import type { Size } from '@/X3UI/types';
+
+const slots = defineSlots();
 
 const show = defineModel<boolean>('show', { default: false });
 
