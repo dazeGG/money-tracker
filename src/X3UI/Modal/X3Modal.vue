@@ -15,8 +15,14 @@
 					<template v-if="slots.default" #default>
 						<slot></slot>
 					</template>
-					<template v-if="slots.footer" #footer>
+					<template v-if="props.showFooter" #footer>
 						<slot name="footer"></slot>
+						<div v-if="!slots.footer">
+							<div class="flex gap-2 justify-end">
+								<X3Button @click="cancel">{{ cancelButtonText ?? 'Cancel' }}</X3Button>
+								<X3Button :type="props.submitButtonType" @click="submit">{{ submitButtonText ?? 'Submit' }}</X3Button>
+							</div>
+						</div>
 					</template>
 				</X3Card>
 			</div>
@@ -27,8 +33,9 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
 import X3Card from '@/X3UI/Card/X3Card.vue';
+import X3Button from '@/X3UI/Button/X3Button.vue';
 
-import type { Size } from '@/X3UI/types';
+import type { Type, Size } from '@/X3UI/types';
 
 const slots = defineSlots();
 
@@ -38,21 +45,32 @@ const props = withDefaults(
 	defineProps<{
     title?: string
     size?: Size
+		showFooter?: boolean
+		cancelButtonText?: string
+		submitButtonText?: string
+		submitButtonType?: Type
   }>(),
 	{
 		size: 'medium',
+		showFooter: true,
+		submitButtonType: 'primary',
 	},
 );
 
 const emit = defineEmits<{
-  (e: 'open'): void;
-  (e: 'close'): void;
+  (e: 'open'): void
+  (e: 'close'): void
+	(e: 'cancel'): void
+	(e: 'submit'): void
 }>();
 
 const close = () => {
 	show.value = false;
 	emit('close');
 };
+
+const cancel = () => emit('cancel');
+const submit = () => emit('submit');
 </script>
 
 <style scoped lang="scss">

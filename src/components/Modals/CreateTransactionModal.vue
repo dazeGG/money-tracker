@@ -1,12 +1,13 @@
 <template>
-	<X3Modal v-model:show="show" title="Add a transaction">
+	<X3Modal
+		v-model:show="show"
+		title="Add a transaction"
+		submit-button-text="Add"
+		@cancel="cancel"
+		@submit="addTransaction"
+	>
 		<template #default>
 			<CreateTransactionForm v-model:model="model" />
-		</template>
-		<template #footer>
-			<div class="flex justify-end">
-				<X3Button type="primary" @click="addTransaction">Add</X3Button>
-			</div>
 		</template>
 	</X3Modal>
 </template>
@@ -16,7 +17,6 @@ import { ref } from 'vue';
 import { useTransactionsStore } from '@/store';
 
 import X3Modal from '@/X3UI/Modal/X3Modal.vue';
-import X3Button from '@/X3UI/Button/X3Button.vue';
 import CreateTransactionForm from '@/components/Forms/CreateTransactionForm.vue';
 
 const transactionsStore = useTransactionsStore();
@@ -27,6 +27,11 @@ const model = ref<{title: string; sum: string}>({ title: '', sum: '' });
 const resetModel = () => {
 	model.value.title = '';
 	model.value.sum = '';
+};
+
+const cancel = () => {
+	resetModel();
+	show.value = false;
 };
 
 const addTransaction = () => {
