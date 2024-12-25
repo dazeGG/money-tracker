@@ -54,6 +54,8 @@ export default [
 			'max-statements-per-line': ['error', { 'max': 1 }],
 			'space-before-function-paren': 'error',
 
+			'@typescript-eslint/no-explicit-any': 'off',
+
 			'vue/multi-word-component-names': 'off',
 			'vue/html-self-closing': ['error', {
 				'html': {

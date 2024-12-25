@@ -2,15 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
 	{
-		path: '/',
-		name: 'HomePage',
-		component: () => import('@/pages/HomePage.vue'),
+		path: '/transactions',
+		name: 'TransactionsPage',
+		component: () => import('@/pages/TransactionsPage.vue'),
 	},
 	{
 		path: '/x3ui-preview',
 		name: 'X3UIPreviewPage',
 		component: () => import('@/pages/X3UIPreviewPage.vue'),
 	},
+	{ path: '/:catchAll(.*)', redirect: '/transactions' },
 ];
 
 const router = createRouter({
