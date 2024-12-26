@@ -19,8 +19,13 @@ export const useTransactionsStore = defineStore('transactions', () => {
 	};
 
 	const addTransaction = (transactionData: ICreateEditTransaction): void => {
+		const newTransactionId: number =
+			transactions.value[transactions.value.length - 1]
+				? transactions.value[transactions.value.length - 1].id + 1
+				: 0;
+
 		transactions.value.push({
-			id: transactions.value[transactions.value.length - 1].id + 1,
+			id: newTransactionId,
 			created: dayjs(),
 			title: transactionData.title,
 			sum: parseInt(transactionData.sum),
